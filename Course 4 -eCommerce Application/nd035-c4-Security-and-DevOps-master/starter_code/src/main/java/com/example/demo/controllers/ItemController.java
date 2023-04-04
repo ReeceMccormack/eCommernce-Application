@@ -29,7 +29,10 @@ public class ItemController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Item> getItemById(@PathVariable Long id) { log.info("Item found");
+	public ResponseEntity<Item> getItemById(@PathVariable Long id) {
+		if (id == null) { log.info("Item not found");
+		return ResponseEntity.notFound().build();
+	}	 log.info("Item found");
 		return ResponseEntity.of(itemRepository.findById(id));
 
 	}
@@ -37,7 +40,7 @@ public class ItemController {
 	@GetMapping("/name/{name}")
 	public ResponseEntity<List<Item>> getItemsByName(@PathVariable String name) {
 		List<Item> items = itemRepository.findByName(name);
-		return items == null || items.isEmpty() ? ResponseEntity.notFound().build()
+		return items == null || items.isEmpty() ?  ResponseEntity.notFound().build()
 				: ResponseEntity.ok(items);
 			
 	}

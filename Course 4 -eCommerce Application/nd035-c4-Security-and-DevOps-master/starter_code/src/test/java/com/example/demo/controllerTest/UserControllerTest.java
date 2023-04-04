@@ -57,6 +57,19 @@ public class UserControllerTest {
 
     }
 
+    @Test
+    public void passwordLengthTest(){
+
+        CreateUserRequest request = new CreateUserRequest();
+        String password = "Pass";
+
+        request.setPassword(password);
+        request.setConfirmPassword(password);
+
+        final ResponseEntity<User> response = userController.createUser(request);
+        Assert.assertTrue("Password is less than 7", password.length() <7);
+    }
+
 }
 
 
