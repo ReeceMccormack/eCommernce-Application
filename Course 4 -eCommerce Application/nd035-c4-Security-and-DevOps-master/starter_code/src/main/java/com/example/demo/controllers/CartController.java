@@ -3,8 +3,9 @@ package com.example.demo.controllers;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.example.demo.Logger.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,9 @@ import com.example.demo.model.requests.ModifyCartRequest;
 @RestController
 @RequestMapping("/api/cart")
 public class CartController {
-	
+
+	@Autowired
+	private Logger Logger;
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -34,43 +37,49 @@ public class CartController {
 	@Autowired
 	private ItemRepository itemRepository;
 
-	private static final Logger log = LoggerFactory.getLogger(CartController.class);
+	private static final org.apache.logging.log4j.Logger log = LogManager.getLogger(CartController.class);
 
 	@PostMapping("/addToCart")
+
 	public ResponseEntity<Cart> addTocart(@RequestBody ModifyCartRequest request) {
+		log.info("CartService: Add to cart service started..");
 		User user = userRepository.findByUsername(request.getUsername());
-		if(user == null) { log.error("Username not found");
+		if(user == null) { Logger.logToCsv(null,"Service: addToCart", "Invalid username -- unable to add item", "404");
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
 		}
 		Optional<Item> item = itemRepository.findById(request.getItemId());
-		if(!item.isPresent()) { log.error("Item not found");
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		if(!item.isPresent()) { Logger.logToCsv(null,"Service: addToCart", "Invalid itemid -- unable to add item", "404");
 		}
 		Cart cart = user.getCart();
 		IntStream.range(0, request.getQuantity())
 			.forEach(i -> cart.addItem(item.get()));
-		log.info("Item added to cart");
+		Logger.logToCsv(user.getId(),"Service: addToCart", "Item added successfully ", "200");
 		cartRepository.save(cart);
+		log.info("CartService: Add to cart service finished..");
 		return ResponseEntity.ok(cart);
 	}
 	
 	@PostMapping("/removeFromCart")
 	public ResponseEntity<Cart> removeFromcart(@RequestBody ModifyCartRequest request) {
+		log.info("CartService: Remove cart service started..");
 		User user = userRepository.findByUsername(request.getUsername());
-		if(user == null) { log.error("Username not found");
+		if(user == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		Optional<Item> item = itemRepository.findById(request.getItemId());
-		if(!item.isPresent()) { log.error("Item not found");
+		if(!item.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		Cart cart = user.getCart();
 		IntStream.range(0, request.getQuantity())
 			.forEach(i -> cart.removeItem(item.get()));
-		log.info("Item removed to cart");
+
 		cartRepository.save(cart);
+		Logger.logToCsv(user.getId(),"Service: removeFromCart", "Item removal successful ", "200");
+		log.info("CartService: Remove from cart service finished..");
 		return ResponseEntity.ok(cart);
+
 	}
 		
 }
