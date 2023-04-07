@@ -12,6 +12,7 @@ public class Logger {
     public static final org.apache.logging.log4j.Logger log = LogManager.getLogger();
     private static final Marker CSV_MARKER = MarkerManager.getMarker("CSV");
 
+
     public Logger() {
     }
     public void logToCsv(Number userId,
@@ -19,6 +20,10 @@ public class Logger {
                          String message,
                          String code)
     {
+
         log.debug(CSV_MARKER, "CSV Logs", Instant.now(), userId, service,  message, code);
     }
+
+
+
 }

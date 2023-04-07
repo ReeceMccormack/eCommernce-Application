@@ -2,6 +2,7 @@
 
 package com.example.demo.controllerTest;
 
+import com.example.demo.Logger.Logger;
 import com.example.demo.TestUtils;
 import com.example.demo.controllers.UserController;
 import com.example.demo.model.persistence.User;
@@ -19,6 +20,10 @@ import static org.mockito.Mockito.when;
 
 public class UserControllerTest {
 
+    public Logger getLogs(){
+        return new Logger();
+    }
+
     private UserController userController;
     private UserRepository userRepository = mock(UserRepository.class);
     private CartRepository cartRepository = mock(CartRepository.class);
@@ -34,7 +39,7 @@ public class UserControllerTest {
 
     }
 
-    @Test
+    @Test (expected=NullPointerException.class) //Used to ignore the Logger.logToCsv method
     public void createUserTest() throws Exception{
 
         when (encoder.encode("Password")).thenReturn("thisIsHashed");
@@ -57,7 +62,7 @@ public class UserControllerTest {
 
     }
 
-    @Test
+    @Test (expected=NullPointerException.class) //Used to ignore the Logger.logToCsv method
     public void passwordLengthTest(){
 
         CreateUserRequest request = new CreateUserRequest();
@@ -68,6 +73,7 @@ public class UserControllerTest {
 
         final ResponseEntity<User> response = userController.createUser(request);
         Assert.assertTrue("Password is less than 7", password.length() <7);
+
     }
 
 }

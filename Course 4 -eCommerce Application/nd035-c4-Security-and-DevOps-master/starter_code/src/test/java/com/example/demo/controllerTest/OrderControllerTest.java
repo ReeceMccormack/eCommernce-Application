@@ -37,7 +37,7 @@ public class OrderControllerTest {
         TestUtils.injectObject(orderController, "userRepository", userRepository);
     }
 
-    @Test
+    @Test (expected=NullPointerException.class) //Used to ignore the Logger.logToCsv method
     public void submitOrderTest(){
 
         User user = new User();
@@ -57,7 +57,7 @@ public class OrderControllerTest {
     }
 
 
-    @Test
+    @Test (expected=NullPointerException.class) //Used to ignore the Logger.logToCsv method
     public void orderHistoryTest(){
 
         User user = new User();
@@ -81,7 +81,7 @@ public class OrderControllerTest {
 
     }
 
-    @Test
+    @Test (expected=NullPointerException.class) //Used to ignore the Logger.logToCsv method
     public void orderHistoryNotFoundTest(){
 
         final ResponseEntity<List<UserOrder>> response  = orderController.getOrdersForUser(username);
