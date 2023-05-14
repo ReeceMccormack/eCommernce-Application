@@ -1,27 +1,4 @@
 datetime, userId, service, message, code
 
 
-2023-04-06T13:54:27.542582800Z,1,Service: createUser,User account 'Reece' created successfully,200
-2023-04-06T14:01:48.675878600Z,1,Service: createUser,User account 'Reece' created successfully,200
-2023-04-06T14:02:01.865030300Z,,Service: createUser,Username set to John,200
-2023-04-06T14:02:01.926043200Z,2,Service: createUser,User account 'John' created successfully,200
-2023-04-06T14:02:35.801114400Z,,Service: createUser,Username set to Bill,200
-2023-04-06T14:02:35.862116300Z,3,Service: createUser,User account 'Bill' created successfully,200
-2023-04-06T14:02:40.024929600Z,,Service: createUser,Username set to Red,200
-2023-04-06T14:02:40.084932Z,4,Service: createUser,User account 'Red' created successfully,200
-2023-04-06T14:02:43.476174700Z,,Service: createUser,Username set to Blue,200
-2023-04-06T14:02:43.537177Z,5,Service: createUser,User account 'Blue' created successfully,200
-2023-04-06T14:03:23.138929700Z,,Service: createUser,Username set to Green,200
-2023-04-06T14:03:23.200927200Z,6,Service: createUser,User account 'Green' created successfully,200
-2023-04-06T22:03:44.826145Z,1,Service: createUser,User account 'Green' created successfully,200
-2023-04-06T22:03:48.432860400Z,,Service: addToCart,Invalid username -- unable to add item,404
-2023-04-06T22:04:08.289713500Z,,Service: addToCart,Invalid username -- unable to add item,404
-2023-04-06T22:04:09.212826Z,,Service: addToCart,Invalid username -- unable to add item,404
-2023-04-06T23:53:47.043981700Z,1,Service: createUser,User account 'Green' created successfully,200
-2023-04-06T23:57:06.910731900Z,1,,,
-2023-04-06T23:57:09.006119600Z,1,,,
-2023-04-07T00:01:05.259916700Z,1,Service: createUser,User account 'Green' created successfully,200
-2023-04-07T10:55:17.186699900Z,1,Service: createUser,User account 'Green' created successfully,200
-2023-04-07T11:08:07.484836400Z,1,Service: createUser,User account 'Green' created successfully,200
-2023-04-07T11:08:14.757553900Z,,Service: createUser,Username set to Green,200
-2023-04-07T11:15:47.332725700Z,1,Service: createUser,User account 'Green' created successfully,200
+2023-04-07T11:44:26.511061900Z,2,Service: OrderService,Order created successfully,200
